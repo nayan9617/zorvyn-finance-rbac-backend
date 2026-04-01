@@ -35,7 +35,7 @@ const listRecordQuerySchema = z.object({
 });
 
 const idParamSchema = z.object({
-  id: z.string().length(24),
+  id: z.string().regex(/^[a-fA-F0-9]{24}$/, "Invalid resource id format"),
 });
 
 module.exports = {
