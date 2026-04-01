@@ -33,6 +33,7 @@ const buildRecordFilter = (query) => {
 };
 
 const createRecord = asyncHandler(async (req, res) => {
+  // Keep creator metadata at write-time so records stay traceable later.
   const record = await FinancialRecord.create({
     ...req.body,
     createdBy: req.user._id,

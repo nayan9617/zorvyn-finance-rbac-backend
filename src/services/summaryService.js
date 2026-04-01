@@ -52,6 +52,7 @@ const getOverview = async () => {
 };
 
 const getRecentActivity = async (limit = 5) => {
+  // Tie-break with createdAt so items with same date are still stable in order.
   return FinancialRecord.find({ isDeleted: false })
     .sort({ date: -1, createdAt: -1 })
     .limit(limit)

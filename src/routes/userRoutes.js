@@ -9,6 +9,7 @@ const { idParamSchema } = require("../validators/recordValidators");
 
 const router = express.Router();
 
+// User management is intentionally admin-only in this assignment scope.
 router.use(protect, authorize(ROLES.ADMIN));
 
 router.post("/", validate(createUserSchema), createUser);
