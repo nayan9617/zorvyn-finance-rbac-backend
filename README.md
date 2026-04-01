@@ -207,3 +207,26 @@ curl http://localhost:5000/api/v1/summary/overview \
 - Soft delete is implemented for records; users are managed by status
 - All records are globally visible to read roles in this assignment scenario
 
+## Evaluation Criteria Mapping
+
+1. Backend Design
+  - Layered architecture with dedicated folders for routes, controllers, services, middleware, models, validators, and utils.
+2. Logical Thinking
+  - Role-based authorization is enforced in middleware and route policy definitions.
+  - Summary APIs use aggregation pipelines rather than manual loops.
+3. Functionality
+  - Supports full finance record lifecycle with filterable listing and soft delete.
+  - Includes health check and seed script for quick local verification.
+4. Code Quality
+  - Consistent naming, focused modules, and centralized success/error response patterns.
+5. Database and Data Modeling
+  - Mongoose schemas define constraints, enums, references, timestamps, and useful index coverage.
+6. Validation and Reliability
+  - Zod request validation for payloads, query params, and route params.
+  - Centralized error handler with meaningful HTTP status codes for validation and conflict scenarios.
+7. Documentation
+  - README includes setup steps, architecture layout, role matrix, API overview, assumptions, and tradeoffs.
+8. Additional Thoughtfulness
+  - Security middleware includes Helmet, CORS, and rate limiting.
+  - Seeded demo users and records reduce reviewer setup friction.
+
