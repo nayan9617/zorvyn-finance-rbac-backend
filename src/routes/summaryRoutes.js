@@ -7,8 +7,9 @@ const { ROLES } = require("../constants/roles");
 const { trendQuerySchema, recentQuerySchema } = require("../validators/summaryValidators");
 
 const router = express.Router();
+const READ_ROLES = [ROLES.ADMIN, ROLES.ANALYST, ROLES.VIEWER];
 
-router.use(protect, authorize(ROLES.ADMIN, ROLES.ANALYST, ROLES.VIEWER));
+router.use(protect, authorize(...READ_ROLES));
 
 router.get("/overview", overview);
 router.get("/trends", validate(trendQuerySchema, "query"), trends);

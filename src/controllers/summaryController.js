@@ -15,6 +15,7 @@ const overview = asyncHandler(async (req, res) => {
 const trends = asyncHandler(async (req, res) => {
   const { mode, months, weeks } = req.query;
 
+  // Weekly and monthly series are built by separate aggregation pipelines.
   const data = mode === "weekly" ? await getWeeklyTrends(weeks) : await getMonthlyTrends(months);
 
   return sendSuccess(res, { mode, points: data }, "Dashboard trends fetched successfully");

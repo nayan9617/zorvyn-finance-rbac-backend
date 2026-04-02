@@ -18,13 +18,35 @@ const {
 } = require("../validators/recordValidators");
 
 const router = express.Router();
+const READ_ROLES = [ROLES.ADMIN, ROLES.ANALYST, ROLES.VIEWER];
 
 router.use(protect);
 
-router.get("/", authorize(ROLES.ADMIN, ROLES.ANALYST, ROLES.VIEWER), validate(listRecordQuerySchema, "query"), listRecords);
-router.get("/:id", authorize(ROLES.ADMIN, ROLES.ANALYST, ROLES.VIEWER), validate(idParamSchema, "params"), getRecordById);
+router.get(
+  "/",
+  authorize(...READ_ROLES),
+  validate(listRecordQuerySchema, "query"),
+  listRecords
+);
+router.get(
+  "/:id",
+  authorize(...READ_ROLES),
+  validate(idParamSchema, "params"),
+  getRecordById
+);
 router.post("/", authorize(ROLES.ADMIN), validate(createRecordSchema), createRecord);
-router.patch("/:id", authorize(ROLES.ADMIN), validate(idParamSchema, "params"), validate(updateRecordSchema), updateRecord);
-router.delete("/:id", authorize(ROLES.ADMIN), validate(idParamSchema, "params"), deleteRecord);
+router.patch(
+  "/:id",
+  authorize(ROLES.ADMIN),
+  validate(idParamSchema, "params"),
+  validate(updateRecordSchema),
+  updateRecord
+);
+router.delete(
+  "/:id",
+  authorize(ROLES.ADMIN),
+  validate(idParamSchema, "params"),
+  deleteRecord
+);
 
 module.exports = router;

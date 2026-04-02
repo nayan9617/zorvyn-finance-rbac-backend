@@ -1,9 +1,11 @@
 const jwt = require("jsonwebtoken");
 const env = require("../config/env");
 const User = require("../models/User");
+const { USER_STATUSES } = require("../constants/roles");
 const AppError = require("../utils/appError");
 const { sendSuccess } = require("../utils/apiResponse");
 const asyncHandler = require("../utils/asyncHandler");
+const { toUserDto } = require("../utils/userDto");
 
 const createToken = (userId) => {
   return jwt.sign({ userId }, env.jwtSecret, {
@@ -26,7 +28,7 @@ const login = asyncHandler(async (req, res) => {
     throw new AppError("Invalid email or password", 401);
   }
 
-  if (user.status !== "active") {
+  if (user.status !== USER_STATUSES.ACTIVE) {
     throw new AppError("Your account is inactive", 403);
   }
 
@@ -36,30 +38,14 @@ const login = asyncHandler(async (req, res) => {
     res,
     {
       token,
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-        status: user.status,
-      },
+      user: toUserDto(user),
     },
     "Login successful"
   );
 });
 
 const me = asyncHandler(async (req, res) => {
-  return sendSuccess(
-    res,
-    {
-      id: req.user._id,
-      name: req.user.name,
-      email: req.user.email,
-      role: req.user.role,
-      status: req.user.status,
-    },
-    "Current user profile"
-  );
+  return sendSuccess(res, toUserDto(req.user), "Current user profile");
 });
 
 module.exports = {

@@ -21,6 +21,7 @@ const buildRecordFilter = (query) => {
 
   if (query.startDate || query.endDate) {
     filter.date = {};
+    // Boundaries are inclusive so day-range filters behave as users expect.
     if (query.startDate) {
       filter.date.$gte = query.startDate;
     }
@@ -117,6 +118,7 @@ const updateRecord = asyncHandler(async (req, res) => {
 });
 
 const deleteRecord = asyncHandler(async (req, res) => {
+  // Soft delete preserves audit history while removing items from normal reads.
   const record = await FinancialRecord.findOneAndUpdate(
     {
       _id: req.params.id,
