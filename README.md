@@ -107,7 +107,7 @@ This creates:
 npm run dev
 ```
 
-Base URL: `http://localhost:5000/api/v1`
+Base URL: `http://localhost:5001/api/v1`
 
 Health check: `GET /api/v1/health`
 
@@ -166,7 +166,7 @@ Access is enforced in backend middleware, not just by frontend assumptions.
 1. Login as admin:
 
 ```bash
-curl -X POST http://localhost:5000/api/v1/auth/login \
+curl -X POST http://localhost:5001/api/v1/auth/login \
   -H "Content-Type: application/json" \
   -d '{"email":"admin@zorvyn.local","password":"Admin@12345"}'
 ```
@@ -180,7 +180,7 @@ export TOKEN="<paste_token_here>"
 3. Create a record:
 
 ```bash
-curl -X POST http://localhost:5000/api/v1/records \
+curl -X POST http://localhost:5001/api/v1/records \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"amount":12000,"type":"income","category":"Bonus","date":"2026-03-01","notes":"Quarterly bonus"}'
@@ -189,7 +189,7 @@ curl -X POST http://localhost:5000/api/v1/records \
 4. Fetch dashboard overview:
 
 ```bash
-curl http://localhost:5000/api/v1/summary/overview \
+curl http://localhost:5001/api/v1/summary/overview \
   -H "Authorization: Bearer $TOKEN"
 ```
 
