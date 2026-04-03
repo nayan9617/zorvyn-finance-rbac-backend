@@ -193,24 +193,6 @@ curl http://localhost:5001/api/v1/summary/overview \
   -H "Authorization: Bearer $TOKEN"
 ```
 
-## API Documentation URL (Optional, Recommended)
-
-This repository includes ready-to-import Postman assets:
-
-- `docs/postman/Zorvyn-Finance-API.postman_collection.json`
-- `docs/postman/Zorvyn-Finance-Local.postman_environment.json`
-
-How to generate a public API documentation URL:
-
-1. Import both files into Postman.
-2. Select the environment `Zorvyn Finance Local`.
-3. Run `Login (Admin)` first to auto-save the JWT token.
-4. Verify requests under Users, Records, and Summary folders.
-5. Open the collection and click `View complete documentation`.
-6. Click `Publish` to generate a public documentation link.
-
-Use that public Postman link in the submission field `Live Demo or API Documentation URL`.
-
 ## Validation and Error Handling
 
 - All request payloads and key query/path params are validated with Zod
